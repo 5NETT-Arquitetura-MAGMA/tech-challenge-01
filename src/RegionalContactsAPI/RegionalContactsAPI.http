@@ -1,0 +1,6 @@
+@RegionalContactsAPI_HostAddress = http://localhost:5005
+
+GET {{RegionalContactsAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
