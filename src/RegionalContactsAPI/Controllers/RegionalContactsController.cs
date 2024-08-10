@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using RegionalContactsAPI.Core.DTO;
-using RegionalContactsAPI.Core.Entity;
 using RegionalContactsAPI.Core.Repository;
-using RegionalContactsAPI.Core.Service;
 using RegionalContactsAPI.Core.Service.Interface;
 
 namespace RegionalContactsAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RegionalContactsController(IContactRepository contactRepository, ICacheService cacheService) : ControllerBase
+    public class RegionalContactsController(IContactRepository contactRepository, ICacheService cacheService)
+        : ControllerBase
     {
         private readonly IContactRepository _contactRepository = contactRepository;
         private readonly ICacheService _cacheService = cacheService;
@@ -20,7 +18,9 @@ namespace RegionalContactsAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var contacts = await _contactRepository.GetAll();
-            var responseDTOs = contacts.Select(contact => ContactMapper.MapToResponseDTO(contact)).ToList(); // Map entities to response DTOs
+            var responseDTOs =
+                contacts.Select(contact => ContactMapper.MapToResponseDTO(contact))
+                    .ToList(); // Map entities to response DTOs
             return Ok(responseDTOs);
         }
 
@@ -32,6 +32,7 @@ namespace RegionalContactsAPI.Controllers
             {
                 return NotFound();
             }
+
             var responseDTO = ContactMapper.MapToResponseDTO(contact); // Map entity to response DTO
             return Ok(responseDTO);
         }
@@ -39,13 +40,6 @@ namespace RegionalContactsAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ContactRequestDTO requestDTO) // Use the request DTO as the parameter
         {
-            var validaRequest = requestDTO.Validate();
-
-            if (validaRequest.Count != 0)
-            {
-                return BadRequest(JsonConvert.SerializeObject(validaRequest));
-            }
-
             var contact = ContactMapper.MapToEntity(requestDTO); // Map request DTO to entity
 
             //Adicionado para teste de cache
@@ -65,7 +59,8 @@ namespace RegionalContactsAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, ContactRequestDTO requestDTO) // Use the request DTO as the parameter
+        public async Task<IActionResult>
+            Update(int id, ContactRequestDTO requestDTO) // Use the request DTO as the parameter
         {
             var contactRequest = await _contactRepository.Get(id);
             var contact = ContactMapper.MapToEntity(requestDTO); // Map request DTO to entity
@@ -92,8 +87,5 @@ namespace RegionalContactsAPI.Controllers
             await _contactRepository.Delete(id);
             return NoContent();
         }
-
     }
-
-    
 }

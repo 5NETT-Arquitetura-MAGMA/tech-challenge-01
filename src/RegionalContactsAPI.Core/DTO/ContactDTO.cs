@@ -1,60 +1,31 @@
-using System.Collections;
-using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using RegionalContactsAPI.Core.Entity;
 
 namespace RegionalContactsAPI.Core.DTO
 {
     public class ContactRequestDTO
     {
+        [Required(ErrorMessage = "O Nome √© obrigat√≥rio.")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "O telefone √© obrigat√≥rio.")]
+        [Range(100000000, 999999999, ErrorMessage = "O telefone deve ter 9 digitos.")]
         public int Telefone { get; set; }
+
+        [Required(ErrorMessage = "O DDD √© obrigat√≥rio.")]
+        [Range(01, 99, ErrorMessage = "O DDD deve ter 2 digitos.")]
         public int DDD { get; set; }
+
+        [Required(ErrorMessage = "O e-mail √© obrigat√≥rio.")]
+        [EmailAddress(ErrorMessage = "O e-mail informado n√£o √© v√°lido.")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "O estado √© obrigat√≥rio.")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "O Estado deve conter exatos 2 caracteres. Exemplo: SP")]
         public string Estado { get; set; }
+
+        [Required(ErrorMessage = "A cidade √© obrigat√≥rio.")]
         public string Cidade { get; set; }
-
-        public List<ValidationError> Validate()
-        {
-            List<ValidationError> errors = new List<ValidationError>();
-
-            if (string.IsNullOrEmpty(Nome))
-            {
-                errors.Add(new ValidationError { Field = "Nome", Message = "O campo Nome È obrigatÛrio." });
-            }
-
-            if (Telefone <= 0 || Telefone.ToString().Length < 8 || Telefone.ToString().Length > 9)
-            {
-                errors.Add(new ValidationError { Field = "Telefone", Message = "O campo Telefone deve ter entre 8 e 9 dÌgitos." });
-            }
-
-            if (DDD <= 0 || DDD.ToString().Length != 2)
-            {
-                errors.Add(new ValidationError { Field = "DDD", Message = "O Campo DDD deve conter 2 n˙meros." });
-            }
-
-            if (string.IsNullOrEmpty(Email))
-            {
-                errors.Add(new ValidationError { Field = "Email", Message = "O campo Email È obrigatÛrio." });
-            }
-
-            if (string.IsNullOrEmpty(Estado))
-            {
-                errors.Add(new ValidationError { Field = "Estado", Message = "O campo Estado È obrigatÛrio." });
-            }
-
-            if (string.IsNullOrEmpty(Cidade))
-            {
-                errors.Add(new ValidationError { Field = "Cidade", Message = "O campo Cidade È obrigatÛrio." });
-            }
-
-            return errors;
-        }
-    }
-
-    public class ValidationError
-    {
-        public string Field { get; set; }
-        public string Message { get; set; }
     }
 
     public class ContactResponseDTO
