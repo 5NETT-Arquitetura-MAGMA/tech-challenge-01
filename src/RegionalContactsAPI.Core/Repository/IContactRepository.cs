@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RegionalContactsAPI.Core.Entity;
+﻿using RegionalContactsAPI.Core.Entity;
 
 namespace RegionalContactsAPI.Core.Repository
 {
     public interface IContactRepository : IEntityBase<Contact>
     {
-        
+        Task<IEnumerable<Contact>> GetByDDDAsync(int ddd);
     }
 }
