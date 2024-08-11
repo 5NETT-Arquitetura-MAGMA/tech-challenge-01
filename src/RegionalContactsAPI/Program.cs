@@ -20,6 +20,8 @@ builder.Services.AddDbContext<ContactDbContext>(options =>
 });
 
 builder.Services.AddScoped(typeof(IEntityBase<>), typeof(EntityRepository<>));
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<ICidadeService, CidadeService>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
 builder.Services.AddScoped<ICacheService, CacheService>();
