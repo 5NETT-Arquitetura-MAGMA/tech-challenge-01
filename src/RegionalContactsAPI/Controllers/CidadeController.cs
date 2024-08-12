@@ -30,7 +30,7 @@ namespace RegionalContactsAPI.Controllers
 
                 if (cidades == null || !cidades.Any())
                 {
-                    return NoContent(); 
+                    return NoContent();
                 }
 
                 var cacheOptions = new MemoryCacheEntryOptions()
@@ -39,7 +39,7 @@ namespace RegionalContactsAPI.Controllers
                 _memoryCache.Set(CacheKey, cidades, cacheOptions);
             }
 
-            return Ok(cidades); 
+            return Ok(cidades);
         }
 
         [HttpGet("{id}")]

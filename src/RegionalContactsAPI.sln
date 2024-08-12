@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegionalContactsAPI.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegionalContactsAPI.Infrastructure", "RegionalContactsAPI.Infrastructure\RegionalContactsAPI.Infrastructure.csproj", "{65F007EB-D991-44B1-B9DF-87EBD7CF3BBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactRegionalTest", "ContactRegionalTest\ContactRegionalTest.csproj", "{BA8B8277-DE88-414B-8273-5CC4F12F69B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegionalContactsTest", "ContactRegionalTest\RegionalContactsTest.csproj", "{BA8B8277-DE88-414B-8273-5CC4F12F69B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

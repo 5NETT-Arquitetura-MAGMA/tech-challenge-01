@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using RegionalContactsAPI.Core.DTO;
 using RegionalContactsAPI.Core.Entity;
 using RegionalContactsAPI.Core.Service.Interface;
@@ -29,7 +28,7 @@ namespace RegionalContactsAPI.Controllers
                 contacts = await _contactService.GetAllContactsAsync();
             }
             else
-            { 
+            {
                 contacts = await _contactService.GetContactsByDDDAsync(ddd.Value);
             }
 
@@ -42,7 +41,6 @@ namespace RegionalContactsAPI.Controllers
             var responseDTOs = contacts.Select(contact => ContactMapper.MapToResponseDTO(contact)).ToList();
             return Ok(responseDTOs);
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
@@ -61,7 +59,6 @@ namespace RegionalContactsAPI.Controllers
         public async Task<IActionResult> Add(ContactRequestDTO requestDTO)
         {
             var contact = ContactMapper.MapToEntity(requestDTO);
-
 
             //Adicionado para teste de cache
             //var dados = await _cacheService.GetCidades();
@@ -94,6 +91,7 @@ namespace RegionalContactsAPI.Controllers
             contactRequest.DDD = contact.DDD;
             contactRequest.Estado = contact.Estado;
             contactRequest.Cidade = contact.Cidade;
+            contactRequest.Email = contact.Email;
 
             await _contactService.UpdateContactAsync(contactRequest);
             return NoContent();
