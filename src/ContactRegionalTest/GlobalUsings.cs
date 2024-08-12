@@ -1,0 +1,11 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Testing;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Caching.Memory;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using RegionalContactsAPI.Controllers;
+global using RegionalContactsAPI.Core.Entity;
+global using RegionalContactsAPI.Core.Service;
+global using RegionalContactsAPI.Infrastructure.Repository;
+global using Xunit;

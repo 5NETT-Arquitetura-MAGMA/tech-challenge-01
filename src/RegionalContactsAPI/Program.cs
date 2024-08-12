@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using RegionalContactsAPI.Core.Repository;
-using RegionalContactsAPI.Infrastructure.Repository;
-using Microsoft.Extensions.Caching.Memory;
 using RegionalContactsAPI.Core.Service;
 using RegionalContactsAPI.Core.Service.Interface;
+using RegionalContactsAPI.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,3 +43,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program
+{ }

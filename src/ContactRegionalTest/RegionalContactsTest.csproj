@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="appsettings.Development.test.json" />
+		<None Remove="appsettings.test.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="appsettings.Development.test.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="appsettings.test.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.7" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageReference Include="Moq" Version="4.20.70" />
+		<PackageReference Include="xunit" Version="2.5.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RegionalContactsAPI.Core\RegionalContactsAPI.Core.csproj" />
+		<ProjectReference Include="..\RegionalContactsAPI.Infrastructure\RegionalContactsAPI.Infrastructure.csproj" />
+		<ProjectReference Include="..\RegionalContactsAPI\RegionalContactsAPI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
+
+</Project>

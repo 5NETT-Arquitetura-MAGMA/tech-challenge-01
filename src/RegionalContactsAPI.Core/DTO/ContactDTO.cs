@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using RegionalContactsAPI.Core.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace RegionalContactsAPI.Core.DTO
 {
