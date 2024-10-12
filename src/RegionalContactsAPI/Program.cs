@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 using RegionalContactsAPI.Core.Repository;
 using RegionalContactsAPI.Core.Service;
 using RegionalContactsAPI.Core.Service.Interface;
@@ -36,6 +37,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+#region Prometheus
+
+var counter = Metrics.CreateCounter("webapimetric", "Conta os requests da API.", new CounterConfiguration
+{
+    LabelNames = new[] { "method", "endpoint" }
+});
+
+app.Use((context, next) =>
+{
+    counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+    return next();
+});
+
+app.UseMetricServer();
+app.UseHttpMetrics();
+
+#endregion
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -45,4 +64,5 @@ app.MapControllers();
 app.Run();
 
 public partial class Program
-{ }
+{
+}
