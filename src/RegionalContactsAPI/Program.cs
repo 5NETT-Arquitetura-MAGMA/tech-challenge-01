@@ -27,6 +27,7 @@ builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
 builder.Services.AddScoped<ICacheService, CacheService>();
 
 builder.Services.AddMemoryCache(); // Add IMemoryCache service
+builder.Services.UseHttpClientMetrics(); 
 
 var app = builder.Build();
 
@@ -39,16 +40,16 @@ if (app.Environment.IsDevelopment())
 
 #region Prometheus
 
-var counter = Metrics.CreateCounter("webapimetric", "Conta os requests da API.", new CounterConfiguration
-{
-    LabelNames = new[] { "method", "endpoint" }
-});
-
-app.Use((context, next) =>
-{
-    counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
-    return next();
-});
+// var counter = Metrics.CreateCounter("webapimetric", "Conta os requests da API.", new CounterConfiguration
+// {
+//     LabelNames = new[] { "method", "endpoint" }
+// });
+//
+// app.Use((context, next) =>
+// {
+//     counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+//     return next();
+// });
 
 app.UseMetricServer();
 app.UseHttpMetrics();
