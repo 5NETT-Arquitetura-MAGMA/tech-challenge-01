@@ -25,7 +25,7 @@ namespace RegionalContactsAPI.Controllers
         {
             if (!_memoryCache.TryGetValue(CacheKey, out IEnumerable<Cidade> cidades))
             {
-                // Se não estiver no cache, busque as cidades do serviço
+                  // Se não estiver no cache, busque as cidades do serviço
                 cidades = await _cidadeService.GetAllCidadesAsync();
 
                 if (cidades == null || !cidades.Any())
